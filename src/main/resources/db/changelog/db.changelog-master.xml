@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="zablon">
+
+        <createTable tableName="habits">
+
+            <column name="id" type="CHAR(36)">
+                <constraints
+                    primaryKey="true"
+                    nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(255)">
+                <constraints
+                    nullable="false"
+                    unique="true"/>
+            </column>
+
+            <column name="description" type="VARCHAR(255)"/>
+
+            <column name="frequency" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="start_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="2" author="zablon">
+
+        <createTable tableName="trackings">
+
+            <column name="id" type="CHAR(36)">
+                <constraints
+                    primaryKey="true"
+                    nullable="false"/>
+            </column>
+
+            <column name="habit_id" type="CHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="timestamp" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="note" type="VARCHAR(500)"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+            baseTableName="trackings"
+            baseColumnNames="habit_id"
+            referencedTableName="habits"
+            referencedColumnNames="id"
+            constraintName="fk_tracking_habit"/>
+
+    </changeSet>
+
+</databaseChangeLog>
