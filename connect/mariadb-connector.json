@@ -1,0 +1,23 @@
+{
+  "name": "mariadb-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+
+    "database.hostname": "mariadb",
+    "database.port": "3306",
+    "database.user": "debezium",
+    "database.password": "dbz_password",
+
+    "database.server.id": "5400",
+
+    "topic.prefix": "habit_tracker",
+
+    "database.include.list": "habit_tracker",
+    "table.include.list": "habit_tracker.habits,habit_tracker.trackings",
+
+    "schema.history.internal.kafka.bootstrap.servers": "kafka:9092",
+    "schema.history.internal.kafka.topic": "schema-changes.habit_tracker",
+
+    "include.schema.changes": "true"
+  }
+}
